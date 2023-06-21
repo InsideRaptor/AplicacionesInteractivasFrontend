@@ -7,6 +7,7 @@ import { LibroAddComponent } from './components/libro-add/libro-add.component';
 import { LibroListComponent } from './components/libro-list/libro-list.component';
 import { EstanteAddComponent } from './components/estante-add/estante-add.component';
 import { EstanteListComponent } from './components/estante-list/estante-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EstanteListComponent } from './components/estante-list/estante-list.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
