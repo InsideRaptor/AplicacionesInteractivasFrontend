@@ -1,1 +1,82 @@
-<p>libro-add works!</p>
+<div class="container mt-4">
+    <form [formGroup]="libroForm">
+        <div class="container">
+            <h3 class="mb-3">Agregar Libro</h3>
+            <div class="bg-light p-4">
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Titulo</label>
+                        <input formControlName="titulo" class="form-control" onpaste="return false">
+                        <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
+                            <p *ngIf="titulo.errors?.['required']" style="font-size: small; color: red">campo obligatorio</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Descripcion</label>
+                        <input formControlName="descripcion" class="form-control" onpaste="return false">
+                        <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">
+                            <p *ngIf="descripcion.errors?.['required']" style="font-size: small; color: red">campo obligatorio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Autor</label>
+                        <input formControlName="autor" class="form-control" onpaste="return false">
+                        <div *ngIf="autor.invalid && (autor.dirty || autor.touched)">
+                            <p *ngIf="autor.errors?.['required']" style="font-size: small; color: red">campo obligatorio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Editorial</label>
+                        <input formControlName="editorial" class="form-control" onpaste="return false">
+                        <div *ngIf="editorial.invalid && (editorial.dirty || editorial.touched)">
+                            <p *ngIf="editorial.errors?.['required']" style="font-size: small; color: red">campo obligatorio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Estante</label>
+                        <select class="form-control form-control-sm w-100 dark-input" formControlName="estante">
+                            <option *ngFor="let estante of estanteList" [value]="estante.id">{{estante.id}}</option>
+                        </select>
+                        <div *ngIf="estante.invalid && (estante.dirty || estante.touched)">
+                            <p *ngIf="estante.errors?.['required']" style="font-size: small; color: red">campo obligatorio</p>
+                            <p *ngIf="estante.errors?.['pattern']" style="font-size: small; color: red">solo numeros</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="mb-4">
+                <button type="button" class="btn btn-primary" [disabled]="!libroForm.valid" (click)="addLibro()">Agregar</button>
+
+                <ng-template #modalAdd let-modal>
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ mensajeTitulo }}</h5>
+                        <button class="close" aria-label="Close" (click)="modal.close('close')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div *ngIf="mensajeExito" class="text-success text-center p-4">
+                        <h3>{{ mensajeExito }}</h3>
+                    </div>
+                    <div *ngIf="mensajeError" class="text-danger text-center p-4">
+                        <h3>{{ mensajeError }}</h3>
+                    </div>
+                </ng-template>
+
+            </div>
+        </div>
+    </form>
+</div>
+
