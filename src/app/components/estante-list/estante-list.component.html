@@ -1,1 +1,60 @@
-<p>estante-list works!</p>
+<h1>Listar estantes</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Capacidad</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let estante of estanteList | paginate: { itemsPerPage: 5, currentPage: p }">
+      <td>{{ estante.id }}</td>
+      <td>{{ estante.capacidad }}</td>
+      <td>
+        <button class="btn btn-sm btn-primary mr-2" (click)="edit(modalUpdate, estante)">Editar</button>
+        <button class="btn btn-sm btn-danger" (click)="delete(estante.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+<ng-template #modalUpdate let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Actualizar Estante</h5>
+        <button class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row justify-content-center">
+            <div class="p-4">
+                <div class="form-group mb-3">
+                    <label>Capacidad</label>
+                    <input class="form-control form-control-sm w-100" [(ngModel)]="capacidad" type="text" placeholder="Capacidad">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+      <button class="btn btn-primary" (click)="modal.close()">Actualizar</button>
+    </div>
+</ng-template>
+
+<ng-template #modalAdd let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">{{ mensajeTitulo }}</h5>
+        <button class="close" aria-label="Close" (click)="modal.close('close')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div *ngIf="mensajeExito" class="text-success text-center p-4">
+        <h3>{{ mensajeExito }}</h3>
+    </div>
+    <div *ngIf="mensajeError" class="text-danger text-center p-4">
+        <h3>{{ mensajeError }}</h3>
+    </div>
+</ng-template>
