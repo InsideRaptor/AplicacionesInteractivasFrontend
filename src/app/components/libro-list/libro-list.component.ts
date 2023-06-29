@@ -33,7 +33,6 @@ export class LibroListComponent implements OnInit {
   @ViewChild('modalAdd') modalAdd: any;
   libroList: Array<Libro>;
   estanteList: Array<Estante>;
-  libro = new Libro();
 
   ngOnInit() {
     this.titleService.setTitle('Listar libros');
