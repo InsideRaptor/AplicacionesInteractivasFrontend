@@ -59,7 +59,7 @@ export class LibroListComponent implements OnInit {
     this.editorial = libro.editorial;
     this.estanteId = libro.estante.id;
     this.modalService.open(updateModal).result.then(() => {
-      if (this.titulo.trim() !== '') {
+      if (this.titulo.trim() !== '' && this.descripcion.trim() !== '' && this.autor.trim() !== '' && this.editorial.trim() !== '') {
         libro.titulo = this.titulo;
         libro.descripcion = this.descripcion;
         libro.autor = this.autor;
@@ -79,6 +79,10 @@ export class LibroListComponent implements OnInit {
             this.openModal();
           }
         );
+      } else {
+        this.mensajeTitulo = 'Actualización Fallida';
+        this.mensajeError = `Debe completar todos los campos`;
+        this.openModal();
       }
     });
   }
