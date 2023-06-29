@@ -1,1 +1,39 @@
-<p>estante-add works!</p>
+<div class="container mt-4">
+    <form [formGroup]="estanteForm">
+        <div class="container">
+            <h3 class="mb-3">Agregar Estante</h3>
+            <div class="bg-light p-4">
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label>Capacidad</label>
+                        <input formControlName="capacidad" class="form-control" maxlength="3" onpaste="return false">
+                        <div *ngIf="capacidad.invalid && (capacidad.dirty || capacidad.touched)">
+                            <p *ngIf="capacidad.errors?.['required']" style="font-size: small; color: red">campo obligatorio</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="mb-4">
+                <button type="button" class="btn btn-primary" [disabled]="!estanteForm.valid" (click)="addEstante()">Agregar</button>
+
+                <ng-template #modalAdd let-modal>
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ mensajeTitulo }}</h5>
+                        <button class="close" aria-label="Close" (click)="modal.close('close')">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div *ngIf="mensajeExito" class="text-success text-center p-4">
+                        <h3>{{ mensajeExito }}</h3>
+                    </div>
+                    <div *ngIf="mensajeError" class="text-danger text-center p-4">
+                        <h3>{{ mensajeError }}</h3>
+                    </div>
+                </ng-template>
+
+            </div>
+        </div>
+    </form>
+</div>
+
