@@ -1,1 +1,84 @@
-<p>libro-list works!</p>
+<h1>Listar libros</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Descripción</th>
+      <th>Autor</th>
+      <th>Editorial</th>
+      <th>Estante</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let libro of libroList | paginate: { itemsPerPage: 5, currentPage: p }">
+      <td>{{ libro.titulo }}</td>
+      <td>{{ libro.descripcion }}</td>
+      <td>{{ libro.autor }}</td>
+      <td>{{ libro.editorial }}</td>
+      <td>{{ libro.estante.id }}</td>
+      <td>
+        <button class="btn btn-sm btn-primary mr-2" (click)="edit(modalUpdate, libro)">Editar</button>
+        <button class="btn btn-sm btn-danger" (click)="delete(libro.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+<ng-template #modalUpdate let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Actualizar Libro</h5>
+        <button class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row justify-content-center">
+            <div class="p-4">
+                <div class="form-group mb-3">
+                    <label>Titulo</label>
+                    <input class="form-control form-control-sm w-100" [(ngModel)]="titulo" type="text" placeholder="Título">
+                </div>
+                <div class="form-group mb-3">
+                    <label>Descripcion</label>
+                    <input class="form-control form-control-sm w-100" [(ngModel)]="descripcion" type="text" placeholder="Descripción">
+                </div>
+                <div class="form-group mb-3">
+                    <label>Autor</label>
+                    <input class="form-control form-control-sm w-100" [(ngModel)]="autor" type="text" placeholder="Autor">
+                </div>
+                <div class="form-group mb-3">
+                    <label>Editorial</label>
+                    <input class="form-control form-control-sm w-100" [(ngModel)]="editorial" type="text" placeholder="Editorial">
+                </div>
+                <div class="form-group mb-3">
+                    <label>Estante</label>
+                    <select class="form-control form-control-sm w-100" [(ngModel)]="estanteId">
+                    <option *ngFor="let estante of estanteList" [value]="estante.id">{{estante.id}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+      <button class="btn btn-primary" (click)="modal.close()">Update</button>
+    </div>
+</ng-template>
+
+<ng-template #modalAdd let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">{{ mensajeTitulo }}</h5>
+        <button class="close" aria-label="Close" (click)="modal.close('close')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div *ngIf="mensajeExito" class="text-success text-center p-4">
+        <h3>{{ mensajeExito }}</h3>
+    </div>
+    <div *ngIf="mensajeError" class="text-danger text-center p-4">
+        <h3>{{ mensajeError }}</h3>
+    </div>
+</ng-template>
