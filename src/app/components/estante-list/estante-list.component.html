@@ -1,26 +1,28 @@
 <h1>Listar estantes</h1>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Capacidad</th>
-      <th>Acciones</th>
+      <th class="col-4">ID</th>
+      <th class="col-5">Capacidad</th>
+      <th class="actions col-2">Acciones</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let estante of estanteList | paginate: { itemsPerPage: 5, currentPage: p }">
       <td>{{ estante.id }}</td>
       <td>{{ estante.capacidad }}</td>
-      <td>
-        <button class="btn btn-sm btn-primary mr-2" (click)="edit(modalUpdate, estante)">Editar</button>
-        <button class="btn btn-sm btn-danger" (click)="delete(estante.id)">Eliminar</button>
+      <td class="actions">
+        <button class="btn btn-sm btn-primary mb-2" (click)="edit(modalUpdate, estante)">Editar</button>
+        <button class="btn btn-sm btn-danger mb-2" (click)="delete(estante.id)">Eliminar</button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="pagination">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
 
 <ng-template #modalUpdate let-modal>
     <div class="modal-header">

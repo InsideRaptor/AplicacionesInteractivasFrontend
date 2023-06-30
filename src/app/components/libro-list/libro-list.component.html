@@ -1,14 +1,14 @@
 <h1>Listar libros</h1>
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Título</th>
-      <th>Descripción</th>
-      <th>Autor</th>
-      <th>Editorial</th>
-      <th>Estante</th>
-      <th>Acciones</th>
+        <th class="col-2">Título</th>
+        <th class="col-3">Descripción</th>
+        <th class="col-2">Autor</th>
+        <th class="col-1">Editorial</th>
+        <th class="col-1">Estante</th>
+        <th class="actions col-2">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -18,15 +18,17 @@
       <td>{{ libro.autor }}</td>
       <td>{{ libro.editorial }}</td>
       <td>{{ libro.estante.id }}</td>
-      <td>
-        <button class="btn btn-sm btn-primary mr-2" (click)="edit(modalUpdate, libro)">Editar</button>
-        <button class="btn btn-sm btn-danger" (click)="delete(libro.id)">Eliminar</button>
+      <td class="actions">
+        <button class="btn btn-sm btn-primary mb-2" (click)="edit(modalUpdate, libro)">Editar</button>
+        <button class="btn btn-sm btn-danger mb-2" (click)="delete(libro.id)">Eliminar</button>
       </td>
     </tr>
   </tbody>
 </table>
 
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="pagination">
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
 
 <ng-template #modalUpdate let-modal>
     <div class="modal-header">
